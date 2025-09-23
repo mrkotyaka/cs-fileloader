@@ -3,7 +3,6 @@ package ru.mrkotyaka.csfileloader.dto;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 //@RequiredArgsConstructor
 @AllArgsConstructor

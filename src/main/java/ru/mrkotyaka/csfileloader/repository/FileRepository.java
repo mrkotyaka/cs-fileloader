@@ -12,13 +12,8 @@ import java.util.List;
 public interface FileRepository extends JpaRepository<FileEntity, String> {
     List<FileEntity> findByUser(UserEntity user);
 
-//    Optional<FileEntity> findByFilenameAndUser(String filename, User user);
-
-    @Query(value = "SELECT * FROM files LIMIT :limit",  nativeQuery = true)
+    @Query(value = "SELECT * FROM files LIMIT :limit", nativeQuery = true)
     List<FileEntity> getFiles(int limit);
 
     FileEntity findByFilenameAndUser(String filename, UserEntity user);
-
-
-//    void deleteByFilenameAndUser(String filename, User user);
 }

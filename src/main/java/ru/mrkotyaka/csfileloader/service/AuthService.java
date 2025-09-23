@@ -2,7 +2,6 @@ package ru.mrkotyaka.csfileloader.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mrkotyaka.csfileloader.dto.AuthRequest;
@@ -13,7 +12,6 @@ import ru.mrkotyaka.csfileloader.exception.BadCredentialsException;
 import ru.mrkotyaka.csfileloader.repository.TokenRepository;
 import ru.mrkotyaka.csfileloader.repository.UserRepository;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -23,9 +21,6 @@ public class AuthService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
-
-//    @Value("${app.token.expiration-hours:24}")
-//    private int tokenExpirationHours;
 
     @Transactional
     public AuthResponse login(AuthRequest authRequest) {

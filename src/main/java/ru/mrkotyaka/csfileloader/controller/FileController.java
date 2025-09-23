@@ -2,9 +2,6 @@ package ru.mrkotyaka.csfileloader.controller;
 
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +33,7 @@ public class FileController {
     public byte[] downloadFile(
             @RequestHeader("auth-token") String authToken, String filename) {
 
-        var user =authService.validateToken(authToken);
+        var user = authService.validateToken(authToken);
 
         return fileService.downloadFile(filename, user);
     }

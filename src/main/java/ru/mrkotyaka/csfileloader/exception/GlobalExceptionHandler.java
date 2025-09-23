@@ -43,34 +43,4 @@ public class GlobalExceptionHandler {
     ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
         return new ResponseEntity<>(new ErrorResponse(e.getMessage(), errorId.getAndIncrement()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<ErrorResponse> handleRuntimeException(
-//            RuntimeException ex, HttpServletRequest request) {
-//
-//        ErrorResponse error = new ErrorResponse(
-//                ex.getMessage(),
-//                errorId.getAndIncrement()
-//        );
-//
-//        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-//    }
-//
-//    @ExceptionHandler(MaxUploadSizeExceededException.class)
-//    public ResponseEntity<String> handleMaxSizeException() {
-//        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE)
-//                .body("File too large!");
-//    }
-//
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<ErrorResponse> handleException(
-//            Exception ex, HttpServletRequest request) {
-//
-//        ErrorResponse error = new ErrorResponse(
-//                ex.getMessage(),
-//                errorId.getAndIncrement()
-//        );
-//
-//        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 }

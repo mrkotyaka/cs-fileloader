@@ -79,36 +79,6 @@ public class FileService {
         fileRepository.save(newFileEntity);
     }
 
-//    public List<FileResponse> getUserFiles(User user) {
-//        return fileRepository.findByUser(user).stream()
-//                .map(this::convertToResponse)
-//                .collect(Collectors.toList());
-//    }
-
-//    public FileEntity getFile(String filename, User user) {
-//        return fileRepository.findByFilenameAndUser(filename, user)
-//                .orElseThrow(() -> new RuntimeException("File not found"));
-//    }
-
-//    public Resource loadFileResource(FileEntity fileEntity) {
-//        try {
-//            return storageService.load(fileEntity.getFilename());
-//        } catch (IOException e) {
-//            throw new RuntimeException("Failed to load file", e);
-//        }
-//    }
-
-//    private FileResponse convertToResponse(FileEntity fileEntity) {
-//        FileResponse response = new FileResponse();
-//        response.setId(fileEntity.getId());
-//        response.setFilename(fileEntity.getFilename());
-//        response.setOriginalFilename(fileEntity.getOriginalFilename());
-//        response.setSize(fileEntity.getSize());
-//        response.setContentType(fileEntity.getContentType());
-//        response.setUploadDate(fileEntity.getUploadDate());
-//        return response;
-//    }
-
     private String generateUniqueFilename(String extension) {
         return UUID.randomUUID().toString() + (extension != null ? "." + extension : "");
     }

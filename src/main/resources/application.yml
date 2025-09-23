@@ -43,9 +43,3 @@ logging:
     org.springframework.web: DEBUG
     org.springframework.boot: DEBUG
     com.example.filestorage: DEBUG
-
-#app:
-#  file-storage:
-#    directory: ./uploads
-#  token:
-#    expiration-hours: 24

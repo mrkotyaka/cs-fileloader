@@ -1,7 +1,10 @@
 package ru.mrkotyaka.csfileloader.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -11,8 +14,6 @@ import lombok.*;
 @Table(name = "files")
 public class FileEntity {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
     @Column(nullable = false)
     private String filename;
 
@@ -23,9 +24,6 @@ public class FileEntity {
 
     @Column(name = "content_type")
     private String contentType;
-
-//    @Column(name = "storage_path")
-//    private String storagePath;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
