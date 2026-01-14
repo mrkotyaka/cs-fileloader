@@ -1,4 +1,4 @@
-# Cloud Storage
+# Cloud Storage 
 
 ## Introduction
 A REST service has been developed that provides a REST interface for uploading files and displaying a list of files already uploaded by the user.
