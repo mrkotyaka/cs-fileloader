@@ -1,43 +1,43 @@
-# «Облачное хранилище»
+# Cloud Storage
 
-## Введение
-Разработан REST-сервис, предоставляющий REST-интерфейс для загрузки файлов и вывода списка уже загруженных файлов пользователя. 
-Все запросы к сервису авторизованы. 
-Заранее подготовленное веб-приложение (FRONT) подключается к разработанному сервису без доработок, а также использован функционал FRONT для авторизации, загрузки и вывода списка файлов пользователя.
+## Introduction
+A REST service has been developed that provides a REST interface for uploading files and displaying a list of files already uploaded by the user.
+All requests to the service are authorized. 
+A pre-built web application (FRONT) connects to the developed service without any modifications, and FRONT functionality is used for authorization, uploading, and displaying a list of user files.
 
 
-## Реализованные требования к приложению
-- Сервис предоставляет REST-интерфейс для интеграции с FRONT.
-- Сервис реализовывает все методы, описанные в [yaml-файле](./CloudServiceSpecification.yaml):  
-  1. Вывод списка файлов.  
-  2. Добавление файла.  
-  3. Удаление файла.  
-  4. Авторизация.
-- Все настройки вычитываются из файла настроек (yml).
-- Информация о пользователях сервиса (логины для авторизации) и данные хранятся в базе данных PostgreSQL-15.
+## Implemented application requirements
+- The service provides a REST interface for integration with FRONT.
+- The service implements all methods described in the [yaml file](./CloudServiceSpecification.yaml):
+1. Displaying the list of files.
+2. Adding a file.
+3. Deleting a file.
+4. Authorization.
+- All settings are read from the settings file (yml).
+- Information about service users (logins for authorization) and data are stored in the PostgreSQL-15 database.
 
-## Реализация
-- Приложение разработано с использованием Spring Boot.
-- Использован сборщик пакетов maven.
-- Для запуска используется docker, docker-compose.
-- Код покрыт unit-тестами с использованием mockito.
-- Добавлены интеграционные тесты с использованием testcontainers.
+## Implementation
+- The application was developed using Spring Boot.
+- The maven package builder was used.
+- Docker and docker-compose are used for launching.
+- The code is covered by unit tests using mockito.
+- Integration tests using testcontainers have been added.
 
-## Авторизация приложения
-FRONT-приложение использует header `auth-token`, в котором отправляет токен (ключ-строка) для идентификации пользователя на BACKEND.
-Для получения токена нужно пройти авторизацию на BACKEND и отправить на метод  `/login` логин и пароль. 
-В случае успешной проверки в ответ BACKEND должен вернуть json-объект с полем `auth-token` и значением токена. 
-Все дальейшие запросы с FRONTEND, кроме метода `/login`, отправляются с этим `header`.
-Для выхода из приложения нужно вызвать метод BACKEND `/logout`, который удалит/деактивирует токен. 
-Последующие запросы с этим токеном будут не авторизованы и вернут код 401.
+## Application authorization
+The FRONT application uses the `auth-token` header, in which it sends a token (key string) to identify the user on the BACKEND.
+To obtain a token, you need to authorize on the BACKEND and send your login and password to the `/login` method. 
+If the verification is successful, the BACKEND must return a json object with the `auth-token` field and the token value. 
+All subsequent requests from the FRONTEND, except for the `/login` method, are sent with this `header`.
+To log out of the application, call the BACKEND `/logout` method, which will delete/deactivate the token. 
+Subsequent requests with this token will not be authorized and will return a 401 code.
 
-## Запуск приложения
+## Launching the application
 
-Приложение работает на порту 8080. 
-1. Запаковать проект и получить jar-файл (package).
-2. Собрать docker образы и запустить контейнеры через файл [docker-compose.yml](./docker-compose.yml). 
+The application runs on port 8080. 
+1. Package the project and obtain the jar file (package).
+2. Build docker images and launch containers via the [docker-compose.yml](./docker-compose.yml) file. 
 
-Терминал выведет сообщение, что контейнеры запущены:
+The terminal will display a message that the containers are running:
 ```java
 [+] Running 3/3
  ✔ Network cs-fileloader_default  Created                                                                                                                0.1s 
@@ -45,18 +45,20 @@ FRONT-приложение использует header `auth-token`, в кото
  ✔ Container cs-fileloader-app-1  Started 
 ```
 
-## Эндпоинты (из спецификации):
+Translated with DeepL.com (free version)
 
-✔ `POST /login` — возвращает JSON с полем auth-token.
+## Endpoints (from the specification):
 
-✔ `POST /logout` — требует auth-token в заголовке; деактивирует токен.
+✔ `POST /login` — returns JSON with the auth-token field.
 
-✔ `POST /file?filename=...` — загрузка файла (multipart/form-data), header auth-token.
+✔ `POST /logout` — requires auth-token in the header; deactivates the token.
 
-✔ `GET /file?filename=...` — скачивание файла, header auth-token.
+✔ `POST /file?filename=...` — file upload (multipart/form-data), auth-token header.
 
-✔ `DELETE /file?filename=...` — удаление файла, header auth-token.
+✔ `GET /file?filename=...` — file download, auth-token header.
 
-✔ `PUT /file?filename=...` — переименование (в body JSON { "name": "newName" }), header auth-token.
+✔ `DELETE /file?filename=...` — file deletion, auth-token header.
 
-✔ `GET /list?limit=...` — возвращает список файлов (JSON с filename и size), header auth-token.
+✔ `PUT /file?filename=...` — rename (in body JSON { “name”: “newName” }), header auth-token.
+
+✔ `GET /list?limit=...` — returns a list of files (JSON with filename and size), header auth-token.
